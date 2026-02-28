@@ -7,11 +7,13 @@ if(!(file_exists("./incs/mysql.inc.php"))) {
 
 require_once('./incs/functions.inc.php');
 
-$version = "v3.42.0";
+$version = "v3.43.0";
 //$version = "3.4 Beta - 12/27/2021";
 //$version = "3.30A Beta - 05/15/18";
 $temp = explode(" ", get_variable('_version'));
 $disp_version = $temp[0];
+
+$installer_upgrade_only = (isset($_GET['installer_upgrade']) && $_GET['installer_upgrade'] === '1');
 
 /*
 10/1/08 added error reporting
@@ -4147,6 +4149,12 @@ if((count_responders()== 0) && (get_variable('title_string') == "") && ((!empty(
 	<INPUT TYPE='hidden' NAME='run_quick' VALUE='yes'></FORM>
 	<FORM NAME='normal' METHOD='POST' ACTION='index.php'></FORM>
 <?php
+	}
+
+if($installer_upgrade_only) {
+	print "<DIV style='padding:10px;font-family:Verdana,Arial,sans-serif;'>Upgrade routine complete. You can now continue to TicketsCAD login.</DIV>";
+	print "<DIV style='padding:10px;'><A HREF='index.php'>Continue to login</A></DIV>";
+	exit();
 	}
 
 //	cache buster and logout from statistics module.
