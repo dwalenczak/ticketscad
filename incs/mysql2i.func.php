@@ -254,6 +254,12 @@ function mysql_prepare($query,$link=null){
     
 }
 
+function mysql_prepared_query($query, $types = "", &...$params){
+
+    return mysql2i::mysql_prepared_query($query, $types, ...$params);
+
+}
+
 function mysql_stmt_bind_param($stmt,$types,&...$vars){
     
     return mysql2i::mysql_stmt_bind_param($stmt,$types,...$vars);
@@ -332,5 +338,6 @@ function mysql_unbuffered_query($query,$link=null){
     
 }
 ?>
+
 
 
